@@ -111,7 +111,7 @@ var threeSum = function(nums, target) {
 };
 
 const nums = [-1,0,1,2,-1,-4];
-console.log(threeSum(nums), 0);
+// console.log(threeSum(nums), 0);
 
 
 const salesTeam = {
@@ -151,7 +151,6 @@ const salesTeam = {
 function totalSales(obj, total = 0) {
 // decralre a variable total
 // iterate over input obj
-  console.log(obj, total)
   for(const prop in obj) {
   // create a conditional if 
     //icrement total individualSales is equal to prop, reassing total to the value 
@@ -166,4 +165,73 @@ function totalSales(obj, total = 0) {
   return total
 }
 
-console.log(totalSales(salesTeam)) //16+200+150+100 = 466
+// console.log(totalSales(salesTeam)) //16+200+150+100 = 466
+
+const solutionWindu = (arr) => {
+    if (arr.length === 1) return '';
+    //we need a variable for left and right that we increment as we traverse down
+    //at the end, we need to return a string of Left or Right based on which is greater,
+    //or an empty string if 0 nodes or equal tree heights
+    let left = 0;
+    let right = 0;
+    let BSTrow = 2; //row 1 is first element, and we return if there's only one row
+    let arrEquiv = 2; //this is the array number we must beat to increment BSTrow
+    let idxSwtch = 1;
+    function indexToSwitch(m, n) {
+        //BSTrowlen / 2
+        //index to switch equals the arrEquiv minus BSTleft calling with BSTrow
+        idxSwtch = m - BSTleft(BSTrowlen(n));
+    }
+    function BSTrowlen(n) { //call with BSTrow
+        return 2**(n - 1);
+    };
+    function BSTleft(n) { //call with n === BSTrowlen
+      return n/2 
+    };
+    //number of elements in a row in the array to attribute to a branch like left or right
+    //will be equal to the number of nodes in that Binary row divided by 2
+    //so, first element of array is the first row of BST
+    //elements 2 & 3 of array equal 2nd row of BST
+    //elements 4,5,6,7 of array equal 3rd row of BST ...
+    //elements 8-15 of array equal 4th row of BST
+    //elements to add to Left side equal (2 ^ (BSTrow - 1)) / 2
+    //then same amount for elements to add to Right
+    //then update the BSTrow
+    for (let i = 1; i < arr.length; i++) {
+        if (i > arrEquiv) { //we need to increment BSTrow, etc.
+            BSTrow += 1;
+            arrEquiv += BSTrowlen(BSTrow)//add the length of this new row
+            //run indexToSwitch so we have accurate index to go from left to right
+            indexToSwitch(arrEquiv, BSTrow);
+        }
+        // skip over -1
+        if (arr[i] === -1) {
+            continue;
+        }
+        // test for whether we are looking at left items or right items
+        //run
+        else if (i <= idxSwtch) left += arr[i];
+        else right += arr[i];
+//         console.log('left', left, 'right', right)
+    }
+  	console.log(left, right)
+    if (left > right) return 'Left'
+    else if (right > left) return 'Right'
+    else return '';
+};
+
+const solution = (arr) => {
+  // Type your solution here 
+  arr = arr.filter(num => num > 0);
+  let left = 0;
+  let right = 0;
+  for (let i = 1; i < arr.length; i++) {
+      if (i % 2 === 0) {
+      right += arr[i]
+      } else left += arr[i]
+  }
+  if (!arr.length || left === right) return '';
+  return right > left ? "Right" : "Left";
+};
+const testArr = [3,6,2,9,-1,10];
+console.log(solution(testArr))
