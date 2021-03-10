@@ -235,20 +235,22 @@ const solution = (arr) => {
 };
 const testArr = [3,6,2,9,-1,10];
 // console.log(solution(testArr))
-
-
 var merge = function(intervals) {
-    let result = [];
-    intervals.forEach(element => {
-      if (!result.length) result.push(element);
-      else if (result[result.length-1][1] < element[0]) result.push(element);
-      else if (element[0] === 0 && result[result.length-1][0] > 0 && element[1] > result[result.length-1][1]) [result[result.length-1][0], result[result.length-1][1]] = [ 0, element[1]]; 
-      else if (element[0] === 0 && result[result.length-1][0] > 0) result[result.length-1][0] = 0;
-      else if (element[1] > result[result.length-1][1]) result[result.length-1][1] = element[1]
-      console.log(result, element)
-    });
-    return result
+  let result = [];
+  intervals.sort((a, b) => a[0]- b[0]);
+  console.log(intervals)
+  intervals.forEach(element => {
+    if (!result.length) result.push(element);
+    else if (result[result.length-1][1] < element[0]) result.push(element);
+    else if (element[0] === 0 && result[result.length-1][0] > 0 && element[1] > result[result.length-1][1]) [result[result.length-1][0], result[result.length-1][1]] = [ 0, element[1]]; 
+    else if (element[0] === 0 && result[result.length-1][0] > 0) result[result.length-1][0] = 0;
+    else if (element[1] > result[result.length-1][1]) result[result.length-1][1] = element[1]
+    console.log(result, element)
+  });
+  return result
 };
 
-let intervals = [[1,4],[0,5]]
+
+const merge
+let intervals = [[2,3],[4,5],[6,7],[8,9],[1,10]]
 console.log(merge(intervals))//[[0,5]]
