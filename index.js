@@ -235,22 +235,35 @@ const solution = (arr) => {
 };
 const testArr = [3,6,2,9,-1,10];
 // console.log(solution(testArr))
-var merge = function(intervals) {
-  let result = [];
-  intervals.sort((a, b) => a[0]- b[0]);
-  console.log(intervals)
-  intervals.forEach(element => {
-    if (!result.length) result.push(element);
-    else if (result[result.length-1][1] < element[0]) result.push(element);
-    else if (element[0] === 0 && result[result.length-1][0] > 0 && element[1] > result[result.length-1][1]) [result[result.length-1][0], result[result.length-1][1]] = [ 0, element[1]]; 
-    else if (element[0] === 0 && result[result.length-1][0] > 0) result[result.length-1][0] = 0;
-    else if (element[1] > result[result.length-1][1]) result[result.length-1][1] = element[1]
-    console.log(result, element)
-  });
-  return result
-};
+// var merge = function(intervals) {
+//   let result = [];
+//   intervals.sort((a, b) => a[0]- b[0]);
+//   console.log(intervals)
+//   intervals.forEach(element => {
+//     if (!result.length) result.push(element);
+//     else if (result[result.length-1][1] < element[0]) result.push(element);
+//     else if (element[0] === 0 && result[result.length-1][0] > 0 && element[1] > result[result.length-1][1]) [result[result.length-1][0], result[result.length-1][1]] = [ 0, element[1]]; 
+//     else if (element[0] === 0 && result[result.length-1][0] > 0) result[result.length-1][0] = 0;
+//     else if (element[1] > result[result.length-1][1]) result[result.length-1][1] = element[1]
+//     console.log(result, element)
+//   });
+//   return result
+// };
 
 
-const merge
-let intervals = [[2,3],[4,5],[6,7],[8,9],[1,10]]
+const merge = intervals => {
+  const res = [];
+  intervals.sort((a, b) => a[0] - b[0]);
+  for (let i = 0; i < intervals.length;) {
+    let curInterval = intervals[i];
+    console.log(curInterval, i)
+    while (intervals[i] && intervals[i][0] <= curInterval[1]) {
+      curInterval[1] = Math.max(intervals[i][1], curInterval[1]);
+      i++;
+    };
+    res.push(curInterval)
+  }
+  return res
+}
+let intervals = [[2,3],[4,5],[6,7],[8,9],[1, 10]];
 console.log(merge(intervals))//[[0,5]]
