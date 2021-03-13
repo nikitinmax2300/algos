@@ -293,14 +293,8 @@ var groupAnagrams = function(strs) {
     return result
 };
 
-let strs = ["eat","tea","tan","ate","nat","bat"];
-let strsTest = ["ddddddddddg","dgggggggggg"];
-   //[["bat"],["nat","tan"],["ate","eat","tea"]]
 
-   console.log(groupAnagrams(strsTest));
-
-
-   var groupAnagrams = function(strs) {
+   var groupAnagramsTest = function(strs) {
 
     const groups = {};
 
@@ -312,6 +306,13 @@ let strsTest = ["ddddddddddg","dgggggggggg"];
       } else {
         groups[sort].push(strs[i])
       }
+      console.log(groups)
     }
     return Object.values(groups)
    };
+
+   let strs = ["eat","tea","tan","ate","nat","bat"];
+let strsTest = ["ddddddddddg","dgggggggggg"];
+   //[["bat"],["nat","tan"],["ate","eat","tea"]]
+
+   console.log(groupAnagramsTest(strs));
