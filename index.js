@@ -270,7 +270,15 @@ console.log(merge(intervals))//[[0,5]]
 
 
 var groupAnagrams = function(strs) {
-    
+    //create result arr
+    /// loop over the input arr
+        //create sub arr
+          //inner loop
+            //check if the inner element has the same length as outer element
+              //split charachter into arr and run everymethod passing the includes of the inner element
+              ///  if above evalutes to true push it into sub array and move on
+    //return result
+
 };
 
 let strs = ["eat","tea","tan","ate","nat","bat"]
