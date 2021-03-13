@@ -266,20 +266,32 @@ const merge = intervals => {
   return res
 }
 let intervals = [[2,3],[4,5],[6,7],[8,9],[1, 10]];
-console.log(merge(intervals))//[[0,5]]
+// console.log(merge(intervals))//[[0,5]]
 
 
 var groupAnagrams = function(strs) {
     //create result arr
+    let result = [];
     /// loop over the input arr
+    for (let i = 0; i < strs.length; i++){
         //create sub arr
+        let subArr = [];
           //inner loop
+          for (let j = 0; j < strs.length; j++) {
             //check if the inner element has the same length as outer element
+            if (strs[i].length === strs[j.length]){
               //split charachter into arr and run everymethod passing the includes of the inner element
+              if (strs[j].split('').every((n) => strs[i].includes(n))) subArr.push(strs[j])
               ///  if above evalutes to true push it into sub array and move on
-    //return result
+            };
+          };
+    };
+              //return result
+    return result
 
 };
 
 let strs = ["eat","tea","tan","ate","nat","bat"]
    //[["bat"],["nat","tan"],["ate","eat","tea"]]
+
+   console.log(groupAnagrams(strs));
