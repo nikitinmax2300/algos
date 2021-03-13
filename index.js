@@ -287,14 +287,31 @@ var groupAnagrams = function(strs) {
               ///  if above evalutes to true push it into sub array and move on
             };
           };
-          console.log(subArr)
           if (!result.flat().includes(subArr[0])) result.push(subArr);
     };
               //return result
     return result
 };
 
-let strs = ["eat","tea","tan","ate","nat","bat"]
+let strs = ["eat","tea","tan","ate","nat","bat"];
+let strsTest = ["ddddddddddg","dgggggggggg"];
    //[["bat"],["nat","tan"],["ate","eat","tea"]]
 
-   console.log(groupAnagrams(strs));
+   console.log(groupAnagrams(strsTest));
+
+
+   var groupAnagrams = function(strs) {
+
+    const groups = {};
+
+    for (let i = 0; i < strs.length; i++){
+
+      let sort = strs[i].split('').sort().join('');
+      if (!groups[sort]) {
+        groups[sort] = [strs[i]];
+      } else {
+        groups[sort].push(strs[i])
+      }
+    }
+    return Object.values(groups)
+   };
