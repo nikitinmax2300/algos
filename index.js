@@ -279,20 +279,19 @@ var groupAnagrams = function(strs) {
           //inner loop
           for (let j = 0; j < strs.length; j++) {
             //check if the inner element has the same length as outer element
-            if (strs[i].length === strs[j.length]){
+            if (strs[i].length === strs[j].length){
               //split charachter into arr and run everymethod passing the includes of the inner element
-              if (strs[j].split(' ').every((n) => strs[i].includes(n))) {
+              if (strs[j].split('').every((n) => strs[i].includes(n))) {
                 subArr.push(strs[j])
-                console.log(strs[i], strs[j])
               }
               ///  if above evalutes to true push it into sub array and move on
             };
           };
-          result.push(subArr);
+          console.log(subArr)
+          if (!result.flat().includes(subArr[0])) result.push(subArr);
     };
               //return result
     return result
-
 };
 
 let strs = ["eat","tea","tan","ate","nat","bat"]
