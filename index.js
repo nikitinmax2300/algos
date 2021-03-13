@@ -267,3 +267,11 @@ const merge = intervals => {
 }
 let intervals = [[2,3],[4,5],[6,7],[8,9],[1, 10]];
 console.log(merge(intervals))//[[0,5]]
+
+
+var groupAnagrams = function(strs) {
+    
+};
+
+let strs = ["eat","tea","tan","ate","nat","bat"]
+   //[["bat"],["nat","tan"],["ate","eat","tea"]]
