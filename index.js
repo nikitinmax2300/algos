@@ -315,4 +315,19 @@ var groupAnagrams = function(strs) {
 let strsTest = ["ddddddddddg","dgggggggggg"];
    //[["bat"],["nat","tan"],["ate","eat","tea"]]
 
-   console.log(groupAnagramsTest(strs));
+  //  console.log(groupAnagramsTest(strs));
+
+
+   var maxProduct = function(nums) {
+    let curr;
+    let product;
+    for (let i = 0; i < nums.length; i++) {
+      curr = Math.max(1, i);
+      product = Math.max(curr, curr * i + 1);
+      console.log(curr, product)
+    }
+    return product
+  };
+
+  let numsProd = [2,3,-2,4];
+  console.log(maxProduct(numsProd)) //6
