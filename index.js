@@ -329,5 +329,34 @@ let strsTest = ["ddddddddddg","dgggggggggg"];
     return product
   };
 
-  let numsProd = [2,3,-2,4];
-  console.log(maxProduct(numsProd)) //6
+  // let numsProd = [2,3,-2,4];
+  // console.log(maxProduct(numsProd)) //6
+
+
+  // you can write to stdout for debugging purposes, e.g.
+// console.log('this is a debug message');
+
+function solutionTop(A, B, P) {
+  // write your code in JavaScript (Node.js 8.9.4)
+  // handle edge cases
+  if (!A || !B || !P) return 'not valid input';
+  if (typeof P !== 'string') return 'not valid input';
+  // create auxilary obj dict to store names and phone numbers that match
+  const dict = {};
+  // loop over arrao of numbers
+  for (let i = 0; i < B.length; i++) {
+      //if a number contains substring P store it in dict with assosiated name
+      if (B[i].includes(P)) dict[A[i]] = B[i];
+  };
+  // if object is empty return str if no the shortest key from the object 
+  return (!Object.keys(dict).length) ? 'NO CONTACT' : Object.keys(dict).sort((a, b) => a.length - b.length)[0]
+}
+
+const A = ['sander', 'amy', 'ann', 'michael'];
+const B = ['123456789', '234567890', '789123456', '123123123'];
+console.log(solutionTop(A, B, '1'))
+
+
+// you can write to stdout for debugging purposes, e.g.
+// console.log('this is a debug message');
+
