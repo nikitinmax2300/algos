@@ -360,3 +360,35 @@ console.log(solutionTop(A, B, '1'))
 // you can write to stdout for debugging purposes, e.g.
 // console.log('this is a debug message');
 
+function solutionTop1(S) {
+  // write your code in JavaScript (Node.js 8.9.4)
+  //naive(readable) approach, will be dry with regex
+  //handle edge cases 
+  if (typeof S !== 'string') return 'not valid input'
+  // create a result arr
+  const result = [];
+  // create variable counter to place dashes 
+  let counter = 0;
+  //loop over the input str
+  for (let i of S) { 
+      //check if element is a number
+      if (Number(i) || i === '0') {
+      // check if counter is 3 push dash and restart counter
+      if (counter === 3) {
+          result.push('-');
+          counter = 0;
+      }
+      // push into result
+      result.push(i);
+      //increment counter
+      counter+=1;
+      };
+  };
+  //return result as a string
+  // handle edge case 
+  if (result[result.length-2] === '-') {
+      //es6 swap
+      [result[result.length-2], result[result.length-3]] = [result[result.length-3], result[result.length-2]];
+  };
+  return result.join('')
+}   
