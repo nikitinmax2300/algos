@@ -414,3 +414,129 @@ function solve(N) {
 console.log(solve(1))
 
 
+class MyComponent extends React.Component {
+  constructor(props) {
+    // super(props); -> missing
+    // this.clickHandler = this.clickHandler.bind(this); we have to bind an event listener to the scope
+    // set the default internal state
+    this.state = {
+      clicks: 0
+    };
+  }
+
+  componentDidMount() { 
+    this.refs.myComponentDiv.addEventListener('click', this.clickHandler);
+  }
+
+  componentWillUnmount() {
+    this.refs.myComponentDiv.removeEventListener('click', this.clickHandler);
+  }
+
+  clickHandler() {
+    this.setState({
+      clicks: this.clicks + 1
+    });
+  }
+
+  render() {
+    let children = this.props.children;
+
+    return (
+      <div className="my-component" ref="myComponentDiv">
+      <h2>My Component ({this.state.clicks}//}) clicks})</h2> // misplaced curly brace and parentese
+      <h3>{this.props.headerText}</h3> 
+    {children}
+    </div>
+    );
+  }
+} // -> extra curly brace here
+
+//we could use inline styling or assign an Id attribute instead of class, 
+//but since we are not allowed to change anything inside we`ll do the following
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      body { color: #fffaeb; }
+
+      div,
+      p {
+        padding: 2rem;
+        margin: 2rem 0;
+      }
+    </style>
+
+    <style type="text/css">
+      .outer { background-color: #044e54; }
+      .inner { background-color: #486581; }
+      .target { background-color: #98aeeb; }
+
+      .outer p { background-color: #5c0b33; }
+      .inner p { background-color: #9b1b5a; }
+
+      .outer p.target { background-color: #c42d78; }
+      .inner p.target { background-color: #e668a7; }
+
+      .outer .inner .target { background-color: #fab8d9; }
+      .outer .inner p.target { background-color: #ffe0f0; } //-> this will be the actual color since it`s the most specific 
+      .outer .inner p.target { background-color: hotpink; } // but if we repeat again with the same selectors it will apply as the latest rule
+    </style>
+  </head>
+  <body>
+    <div class="outer">
+      Outer
+      <div class="inner">
+        Inner
+        <p class="target">paragraph</p>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+//QUESTION SET 1:
+ //1. Can you rewrite the following `App` component to be a functional component?
+
+
+import React from "react";
+
+export class App extends React.Component {
+  state = {
+    value: localStorage.getItem("info") || ""
+  };
+  componentDidUpdate() {
+    localStorage.setItem("info", this.state.value);
+  }
+  onChange = (event: any) => {
+    this.setState({ value: event.target.value });
+  };
+  render() {
+    const { value } = this.state;
+    return (
+      <div>
+        <input value={value} type="text" onChange={this.onChange} />
+        <p>{value}</p>
+      </div>
+    );
+  }
+}
+
+//functional component
+import React, { useState, useEffect } from 'react';
+
+export const App = () => {
+  const [value, setValue] = useState(localStorage.getItem('info') || '');
+  
+  useEffect(() => { 
+    localStorage.setItem('info', value);
+  }, [value]);
+
+  const onChange = (event: any) => setValue(event.target.value);
+
+  return (
+    <div>
+      <input value={value} type="text" onChange={onChange} />
+      <p>{value}</p>
+    </div>
+  );
+};
