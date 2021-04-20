@@ -354,7 +354,7 @@ function solutionTop(A, B, P) {
 
 const A = ['sander', 'amy', 'ann', 'michael'];
 const B = ['123456789', '234567890', '789123456', '123123123'];
-console.log(solutionTop(A, B, '1'))
+// console.log(solutionTop(A, B, '1'))
 
 
 // you can write to stdout for debugging purposes, e.g.
@@ -392,3 +392,25 @@ function solutionTop1(S) {
   };
   return result.join('')
 }   
+
+
+function solve(N) {
+  let binaryNum = N.toString(2);
+  if (binaryNum.length % 2 === 1) binaryNum = ['0'].concat(...binaryNum.split(''));
+  let result = [], swap = [];
+  for (let i = binaryNum.length-1; i >= 0; i--) {
+     if (swap.length === 2) {
+         result.push(swap);
+         swap = [];
+     };
+      swap.push(binaryNum[i])
+  };
+ const convertedBinaryNum = result.concat([swap]).reverse().flat().join('');
+ return parseInt(convertedBinaryNum, 2)
+}
+
+//plese double check IDE array prototype .flat() reduce() map() filter() not supported, 
+//es6 array swap and push() acting weird produce unexpected output,
+console.log(solve(1))
+
+
